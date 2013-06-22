@@ -89,6 +89,7 @@ OpenSpending.DailyBread = function (elem) {
 
   this.setData = function (data) {
     self.data = data
+    // console.log("setData -- " + OpenSpending.identifier + " " + data[0][1] + " " + data[0][3][0][1])
   }
 
   this.setDataFromAggregator = function (data, skip) {
@@ -104,6 +105,8 @@ OpenSpending.DailyBread = function (elem) {
         });
     }
     self.setData(handleChildren(data, true));
+    // console.log("setDataFromAggregator -- " + OpenSpending.identifier + " " + handleChildren(data, true)[0][1] + " " + handleChildren(data, true)[0][3][0][1])
+
   }
 
   this.setIconLookup = function(lookup) {
@@ -132,9 +135,17 @@ OpenSpending.DailyBread = function (elem) {
     var tdAry = self.taxAndDataForTier(tierId)
     if (!tdAry) { return } // No child tier for selected area.
     var tax = tdAry[0], data = tdAry[1]
+    // console.log(data[0][1])
 
     var t = self.tiers[tierId] = self.tiers[tierId] || $("<div class='db-tier' data-db-tier='" + tierId + "'></div>").appendTo(self.$e)
     var n = data.length
+    /*
+    console.group("drawTier var");
+    console.log(self.tiers[tierId]);
+    console.log(self.$e);
+    console.log(t);
+    console.groupEnd();
+    */
     var w = 100.0 / n
 
     var icons = _.map(data, function(d) { return self.iconLookup(d[0]); });
@@ -157,7 +168,11 @@ OpenSpending.DailyBread = function (elem) {
                 "</div>"
 
       t.html(_.template(tpl, { activeArea: self.areas[tierId], areas: data, width: w, icons: icons }))
-
+      /* 
+      console.group("drawTier after template");
+      console.log(t);
+      console.groupEnd();
+      */ 
       self.drawIcons(t);
     }
 
@@ -165,6 +180,7 @@ OpenSpending.DailyBread = function (elem) {
     var valEls = t.find('.db-area-value')
     _.each(data, function (area, idx) {
       valEls.eq(idx).text(formatCurrency(tax * area[2], 2))
+      // console.log(area[1] + " " + formatCurrency(tax * area[2], 2))
     })
 
     t.show()
@@ -174,6 +190,7 @@ OpenSpending.DailyBread = function (elem) {
     var data = self.data
     var tax = self.taxVal
     var areaId
+    // console.log("taxAndDataForTier -- " + OpenSpending.identifier + " " + daata[0][1] + " " + data[0][3][0][1])
 
     for (var i = 0, tot = tierId; i < tierId; i += 1) {
       areaId = self.areas[i]
