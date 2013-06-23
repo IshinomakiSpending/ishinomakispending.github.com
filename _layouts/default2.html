@@ -35,8 +35,8 @@
             <label class="control-label" for="select01">データ</label>
               <div class="controls">
                 <select id="select01" onchange="changeSelect()">
-                  <option value="ishinomakinormal" selected>一般財源のみ</option>
-                  <option value="ishinomaki">一般財源＋国庫支出金＋県支出金</option>
+                  <option value="ishinomakinormal">一般財源のみ</option>
+                  <option value="ishinomaki" selected>一般財源＋国庫支出金＋県支出金</option>
                 </select>
               </div>
           </div>
@@ -70,8 +70,8 @@
         // datasetid = options.item(select.selectedIndex).value;
         OpenSpending.identifier = options.item(select.selectedIndex).value;
 
-        if (window.location.pathname == "/") {
-          location.href = "/index2.html";
+        if (window.location.pathname == "/index2.html") {
+          location.href = "/";
         };
 
         if (window.location.pathname == "/bubbletree.html") {
