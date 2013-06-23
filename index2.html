@@ -56,6 +56,27 @@ yepnope({
 
 </script>
 
+<label class="control-label" for="select01">データ</label>
+  <div class="controls">
+    <select id="select01" onchange="changeSelect()">
+      <option value="ishinomakinormal">一般財源のみ</option>
+      <option value="ishinomaki" selected>一般財源＋国庫支出金＋県支出金</option>
+    </select>
+</div>
+
+<script type="text/javascript">
+function changeSelect(){
+  var select = document.getElementById('select01');
+  var options = document.getElementById('select01').options;
+  // datasetid = options.item(select.selectedIndex).value;
+  OpenSpending.identifier = options.item(select.selectedIndex).value;
+
+  if (window.location.pathname == "/index2.html") {
+    location.href = "/";
+  }
+};
+</script>
+
 <div id="dailybread">
   <!--
   <h2 class="page-header">The Daily Bread <small> Costs for the British Taxpayer per Day</small></h2>
